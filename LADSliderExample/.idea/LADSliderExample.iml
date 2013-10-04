@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CIDR_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../LADSlider/LADSlider.h">
+      <sourceFolder url="file://$MODULE_DIR$/../LADSlider/LADSlider.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../LADSlider/LADSlider.m">
+      <sourceFolder url="file://$MODULE_DIR$/../LADSlider/LADSlider.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../LADSlider/LADSliderCell.h">
+      <sourceFolder url="file://$MODULE_DIR$/../LADSlider/LADSliderCell.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../LADSlider/LADSliderCell.m">
+      <sourceFolder url="file://$MODULE_DIR$/../LADSlider/LADSliderCell.m" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+
