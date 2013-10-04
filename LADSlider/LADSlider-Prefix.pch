@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'LADSlider' target in the 'LADSlider' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
