@@ -1,14 +1,14 @@
 //
-//  LADSliderTests.m
-//  LADSliderTests
+//  LADSliderExampleTests.m
+//  LADSliderExampleTests
 //
 //  Created by Alexander Lapshin on 04.10.13.
 //  Copyright (c) 2013 Alexander Lapshin. All rights reserved.
 //
 
-#import "LADSliderTests.h"
+#import "LADSliderExampleTests.h"
 
-@implementation LADSliderTests
+@implementation LADSliderExampleTests
 
 - (void)setUp
 {
@@ -26,7 +26,7 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in LADSliderTests");
+    STFail(@"Unit tests are not implemented yet in LADSliderExampleTests");
 }
 
 @end

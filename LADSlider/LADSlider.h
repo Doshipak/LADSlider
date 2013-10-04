@@ -1,13 +1,13 @@
 //
-//  LADSliderTests.h
-//  LADSliderTests
+//  LADSlider.h
+//  LADSliderExample
 //
 //  Created by Alexander Lapshin on 04.10.13.
 //  Copyright (c) 2013 Alexander Lapshin. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <Cocoa/Cocoa.h>
 
-@interface LADSliderTests : SenTestCase
+@interface LADSlider : NSSlider
 
 @end
