@@ -21,9 +21,9 @@ but if you don't LADSlider will do it for you.
 ```
 You may set only knob image if you want.
 ```objc
-	slider.barFillImage = [NSImage imageNamed:@"barFill.png"];
-	slider.barLeftAgeImage = [NSImage imageNamed:@"barFillLeftAge.png"];
-	slider.barRightAgeImage = [NSImage imageNamed:@"barRightAge.png"];
+slider.barFillImage = [NSImage imageNamed:@"barFill.png"];
+slider.barLeftAgeImage = [NSImage imageNamed:@"barFillLeftAge.png"];
+slider.barRightAgeImage = [NSImage imageNamed:@"barRightAge.png"];
 ```
 If you want to create a progress slider, e.g. like iTunes volume slider you need to set this image too:
 	slider.barFillBeforeKnobImage = [NSImage imageNamed:@"barFillBeforeKnob.png"]; 
@@ -31,12 +31,12 @@ If you want to create a progress slider, e.g. like iTunes volume slider you need
 ### From code
 - You just need to create LADSlider with one of init method:
 ```objc
-	- (id)initWithKnobImage:(NSImage *)knob;
-	- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
-          barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge;
-	- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
-	 barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
-          barLeftAgeImage:(NSImage *)barLeftAge barRightAgeImage:(NSImage *)barRightAge;
+- (id)initWithKnobImage:(NSImage *)knob;
+- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
+        barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge;
+- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
+ barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
+        barLeftAgeImage:(NSImage *)barLeftAge barRightAgeImage:(NSImage *)barRightAge;
 ```
 All of them return nil if one of the arguments is nil.
 
@@ -44,7 +44,9 @@ All of them return nil if one of the arguments is nil.
   
 ## Note
 There is a limit of knob image height for different cell controll size:
+```objc
 NSRegularControlSize:   21 pixels
 NSSmallControlSize:     15 pixels
 NSMiniControlSize:			12 pixels
+```
 You may make them bigger and see what will happen.
