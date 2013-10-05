@@ -47,6 +47,6 @@ There is a limit of knob image height for different cell controll size:
 ```objc
 NSRegularControlSize:   21 pixels
 NSSmallControlSize:     15 pixels
-NSMiniControlSize:	12 pixels
+NSMiniControlSize:		12 pixels
 ```
 You may make them bigger and see what will happen.
