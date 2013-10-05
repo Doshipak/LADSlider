@@ -16,11 +16,13 @@ in "Custom class" tab. You also may set an LADSliderCell class for NSSliderCell
 but if you don't LADSlider will do it for you.
 
 - Then you just need to set an images for your slider like this:
+```c
 	slider.knobImage = [NSImage imageNamed:@"knob.png"];
+```
 You may set only knob image if you want.
-  slider.barFillImage = [NSImage imageNamed:@"barFill.png"];
-  slider.barLeftAgeImage = [NSImage imageNamed:@"barFillLeftAge.png"];
-  slider.barRightAgeImage = [NSImage imageNamed:@"barRightAge.png"];
+	slider.barFillImage = [NSImage imageNamed:@"barFill.png"];
+	slider.barLeftAgeImage = [NSImage imageNamed:@"barFillLeftAge.png"];
+	slider.barRightAgeImage = [NSImage imageNamed:@"barRightAge.png"];
 If you want to create a progress slider, e.g. like iTunes volume slider you need to set this image too:
 	slider.barFillBeforeKnobImage = [NSImage imageNamed:@"barFillBeforeKnob.png"]; 
  
