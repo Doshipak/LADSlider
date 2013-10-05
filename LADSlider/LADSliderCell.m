@@ -91,6 +91,7 @@
 //  just call the super method
     if( nil == _knobImage ) {
         [super drawKnob:knobRect];
+        return;
     }
 
 //  We need to save the knobRect to redraw the bar correctly
@@ -113,6 +114,7 @@
 //  this line will position you knob normally inside the slider
     CGFloat newOriginX = knobRect.origin.x *
             (_barRect.size.width - (_knobImage.size.width - knobRect.size.width)) / _barRect.size.width;
+
     [_knobImage compositeToPoint:NSMakePoint(newOriginX, knobRect.origin.y + _knobImage.size.height)
                        operation:NSCompositeSourceOver];
 
@@ -126,6 +128,7 @@
             nil == _barFillBeforeKnobImage &&
             nil == _barLeftAgeImage && nil == _barRightAgeImage ) {
         [super drawBarInside:cellFrame flipped:flipped];
+        return;
     }
 
 //---------------------Interesting-bug----------------------
@@ -138,10 +141,19 @@
     NSRect beforeKnobRect = [self createBeforeKnobRect];
     NSRect afterKnobRect = [self createAfterKnobRect];
 
-    NSDrawThreePartImage(beforeKnobRect, _barLeftAgeImage, _barFillBeforeKnobImage, _barFillBeforeKnobImage,
-            NO, NSCompositeSourceOver, 1.0, flipped);
-    NSDrawThreePartImage(afterKnobRect, _barFillImage, _barFillImage, _barRightAgeImage,
-            NO, NSCompositeSourceOver, 1.0, flipped);
+//  Sometimes you can see the ages off you bar
+//  even if your knob is at the end or
+//  at the beginning of it. It's about one pixel
+//  but this help to hide that edges
+    if( self.minValue != self.doubleValue ) {
+        NSDrawThreePartImage(beforeKnobRect, _barLeftAgeImage, _barFillBeforeKnobImage, _barFillBeforeKnobImage,
+                NO, NSCompositeSourceOver, 1.0, flipped);
+    }
+
+    if( self.maxValue != self.doubleValue ) {
+        NSDrawThreePartImage(afterKnobRect, _barFillImage, _barFillImage, _barRightAgeImage,
+                NO, NSCompositeSourceOver, 1.0, flipped);
+    }
 }
 
 - (NSRect)createBeforeKnobRect {
@@ -164,5 +176,22 @@
 
     return afterKnobRect;
 }
+
+- (void)setBarFillImage:(NSImage *)barFillImage {
+    _barFillImage = barFillImage;
+
+    if( nil == _barFillBeforeKnobImage ) {
+        _barFillBeforeKnobImage = barFillImage;
+    }
+}
+
+- (void)setBarFillBeforeKnobImage:(NSImage *)barFillBeforeKnobImage {
+    _barFillBeforeKnobImage = barFillBeforeKnobImage;
+
+    if( nil == _barFillImage ) {
+        _barFillImage = barFillBeforeKnobImage;
+    }
+}
+
 
 @end

@@ -19,6 +19,11 @@
 		77BE07ED17FEF382002748D9 /* LADSliderExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BE07EC17FEF382002748D9 /* LADSliderExampleTests.m */; };
 		77BE07F817FEF3CD002748D9 /* LADSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BE07F717FEF3CD002748D9 /* LADSlider.m */; };
 		77BE07FB17FEF3EA002748D9 /* LADSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BE07FA17FEF3EA002748D9 /* LADSliderCell.m */; };
+		77BE080518000E00002748D9 /* itunes_barFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BE080018000E00002748D9 /* itunes_barFill.png */; };
+		77BE080618000E00002748D9 /* itunes_barFillBeforeknob.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BE080118000E00002748D9 /* itunes_barFillBeforeknob.png */; };
+		77BE080718000E00002748D9 /* itunes_barLeftAge.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BE080218000E00002748D9 /* itunes_barLeftAge.png */; };
+		77BE080918000E00002748D9 /* itunes_barRightAge.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BE080418000E00002748D9 /* itunes_barRightAge.png */; };
+		77BE080B18000F38002748D9 /* itunes_knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BE080A18000F38002748D9 /* itunes_knob.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +60,11 @@
 		77BE07F717FEF3CD002748D9 /* LADSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LADSlider.m; path = ../LADSlider/LADSlider.m; sourceTree = "<group>"; };
 		77BE07F917FEF3EA002748D9 /* LADSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LADSliderCell.h; path = ../LADSlider/LADSliderCell.h; sourceTree = "<group>"; };
 		77BE07FA17FEF3EA002748D9 /* LADSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LADSliderCell.m; path = ../LADSlider/LADSliderCell.m; sourceTree = "<group>"; };
+		77BE080018000E00002748D9 /* itunes_barFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itunes_barFill.png; sourceTree = "<group>"; };
+		77BE080118000E00002748D9 /* itunes_barFillBeforeknob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itunes_barFillBeforeknob.png; sourceTree = "<group>"; };
+		77BE080218000E00002748D9 /* itunes_barLeftAge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itunes_barLeftAge.png; sourceTree = "<group>"; };
+		77BE080418000E00002748D9 /* itunes_barRightAge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itunes_barRightAge.png; sourceTree = "<group>"; };
+		77BE080A18000F38002748D9 /* itunes_knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itunes_knob.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +91,11 @@
 		77BE07B617FEF381002748D9 = {
 			isa = PBXGroup;
 			children = (
+				77BE07C117FEF381002748D9 /* Frameworks */,
 				77BE07C817FEF381002748D9 /* LADSliderExample */,
 				77BE07E517FEF382002748D9 /* LADSliderExampleTests */,
-				77BE07C117FEF381002748D9 /* Frameworks */,
 				77BE07C017FEF381002748D9 /* Products */,
+				77BE07FD18000E00002748D9 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,6 +183,34 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		77BE07FD18000E00002748D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				77BE07FE18000E00002748D9 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		77BE07FE18000E00002748D9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				77BE07FF18000E00002748D9 /* iTunesLikeVoumeSlider */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		77BE07FF18000E00002748D9 /* iTunesLikeVoumeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				77BE080A18000F38002748D9 /* itunes_knob.png */,
+				77BE080018000E00002748D9 /* itunes_barFill.png */,
+				77BE080118000E00002748D9 /* itunes_barFillBeforeknob.png */,
+				77BE080218000E00002748D9 /* itunes_barLeftAge.png */,
+				77BE080418000E00002748D9 /* itunes_barRightAge.png */,
+			);
+			path = iTunesLikeVoumeSlider;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -247,6 +286,11 @@
 				77BE07CD17FEF381002748D9 /* InfoPlist.strings in Resources */,
 				77BE07D317FEF381002748D9 /* Credits.rtf in Resources */,
 				77BE07D917FEF382002748D9 /* MainMenu.xib in Resources */,
+				77BE080518000E00002748D9 /* itunes_barFill.png in Resources */,
+				77BE080618000E00002748D9 /* itunes_barFillBeforeknob.png in Resources */,
+				77BE080718000E00002748D9 /* itunes_barLeftAge.png in Resources */,
+				77BE080918000E00002748D9 /* itunes_barRightAge.png in Resources */,
+				77BE080B18000F38002748D9 /* itunes_knob.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
