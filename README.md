@@ -33,9 +33,9 @@ If you want to create a progress slider, e.g. like iTunes volume slider you need
 ```objc
 - (id)initWithKnobImage:(NSImage *)knob;
 - (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
-        barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge;
+      barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge;
 - (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
- barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
+  barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
         barLeftAgeImage:(NSImage *)barLeftAge barRightAgeImage:(NSImage *)barRightAge;
 ```
 All of them return nil if one of the arguments is nil.
