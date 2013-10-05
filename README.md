@@ -29,7 +29,7 @@ If you want to create a progress slider, e.g. like iTunes volume slider you need
 	slider.barFillBeforeKnobImage = [NSImage imageNamed:@"barFillBeforeKnob.png"]; 
  
 ### From code
-- You just need to create LADSlider with one of init method:
+- You just need to create LADSlider with one of the init methods:
 ```objc
 - (id)initWithKnobImage:(NSImage *)knob;
 - (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
