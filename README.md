@@ -16,7 +16,7 @@ in "Custom class" tab. You also may set an LADSliderCell class for NSSliderCell
 but if you don't LADSlider will do it for you.
 
 - Then you just need to set an images for your slider like this:
-```c
+```objc
 	slider.knobImage = [NSImage imageNamed:@"knob.png"];
 ```
 You may set only knob image if you want.
