@@ -1,6 +1,6 @@
 # LADSlider: Fast and simple solution.
 
-If you've tired searching the web for the next quastions:
+If you've tired searching the web for the next questions:
 - "Custom NSSlider"
 - "Cocoa custom slider MacOS"
 - "How to customize NSSlider cocoa" 
