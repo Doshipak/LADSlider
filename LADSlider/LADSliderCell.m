@@ -115,8 +115,11 @@
     CGFloat newOriginX = knobRect.origin.x *
             (_barRect.size.width - (_knobImage.size.width - knobRect.size.width)) / _barRect.size.width;
 
-    [_knobImage compositeToPoint:NSMakePoint(newOriginX, knobRect.origin.y + _knobImage.size.height)
-                       operation:NSCompositeSourceOver];
+	NSRect fromRect = {
+		.origin = {newOriginX, knobRect.origin.y},
+		.size = _knobImage.size
+	};
+	[_knobImage drawInRect:fromRect];
 
     [self.controlView unlockFocus];
 }
