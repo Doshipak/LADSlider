@@ -656,10 +656,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="529" height="116"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <slider focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="544" customClass="LADSlider">
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="544" customClass="LADSlider">
                         <rect key="frame" x="18" y="48" width="493" height="20"/>
                         <animations/>
-                        <sliderCell key="cell" state="on" focusRingType="none" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="545" customClass="LADSliderCell"/>
+                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="545" customClass="LADSliderCell"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="knobImage" value="knob"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="minimumValueImage" value="minimumValueImage"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="maximumValueImage" value="maximumValueImage"/>
+                        </userDefinedRuntimeAttributes>
                     </slider>
                 </subviews>
                 <constraints>
@@ -673,10 +678,14 @@
         </window>
         <customObject id="494" customClass="LADAppDelegate">
             <connections>
-                <outlet property="iTunesLikeSlider" destination="544" id="553"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
     </objects>
+    <resources>
+        <image name="knob" width="19" height="19"/>
+        <image name="maximumValueImage" width="11" height="19"/>
+        <image name="minimumValueImage" width="11" height="19"/>
+    </resources>
 </document>

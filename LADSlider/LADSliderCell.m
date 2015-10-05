@@ -48,29 +48,22 @@
 }
 
 - (void)drawKnob:(NSRect)knobRect {
-//  If don't have the knobImage
-//  just call the super method
     if (!_knobImage) {
         [super drawKnob:knobRect];
         return;
     }
 
-//  We need to save the knobRect to redraw the bar correctly
 	_currentKnobRect = (NSRect){
 		.origin = knobRect.origin,
 		.size = _knobImage.size
 	};
 	
-	[self drawBarInside:_barRect flipped:_flipped];
-
     [self.controlView lockFocus];
 	[_knobImage drawInRect:_currentKnobRect];
     [self.controlView unlockFocus];
 }
 
 - (void)drawBarInside:(NSRect)cellFrame flipped:(BOOL)flipped {
-//  If don't have any of the bar images
-//  just call the super method
 	_barRect = cellFrame;
 	_flipped = flipped;
 	
