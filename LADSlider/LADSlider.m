@@ -42,33 +42,13 @@
     return self;
 }
 
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
-        barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge {
+- (id)initWithKnobImage:(NSImage *)knob minimumValueImage:(NSImage *)minImage maximumValueImage:(NSImage *)maxImage {
     self = [super init];
 
-    if( self ) {
-        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob barFillImage:barFill
-                                               barLeftAgeImage:barLeftAge andbarRightAgeImage:barRightAge]];
+    if (self) {
+        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob minimumValueImage:minImage maximumValueImage:maxImage]];
 
-//      If the cell is nil we return nil
-        return nil == self.cell ? nil : self;
-    }
-
-    return self;
-}
-
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
- barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
-        barLeftAgeImage:(NSImage *)barLeftAge barRightAgeImage:(NSImage *)barRightAge {
-    self = [super init];
-
-    if( self ) {
-        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob barFillImage:barFill
-                                        barFillBeforeKnobImage:barFillBeforeKnob
-                                               barLeftAgeImage:barLeftAge barRightAgeImage:barRightAge]];
-
-//      If the cell is nil we return nil
-        return nil == self.cell ? nil : self;
+        return !self.cell ? nil : self;
     }
 
     return self;
@@ -78,44 +58,33 @@
     Also need to throw on some
     LADSliderCell setters and getters
 */
+
+- (LADSliderCell *)sliderCell {
+	return self.cell;
+}
+
 - (NSImage *)knobImage {
-    return ((LADSliderCell *) self.cell).knobImage;
+    return self.sliderCell.knobImage;
 }
 
 - (void)setKnobImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).knobImage = image;
+    self.sliderCell.knobImage = image;
 }
 
-- (NSImage *)barFillImage {
-    return ((LADSliderCell *) self.cell).barFillImage;
+- (void)setMinimumValueImage:(NSImage *)minimumValueImage {
+	self.sliderCell.minimumValueImage = minimumValueImage;
 }
 
-- (void)setBarFillImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barFillImage = image;
+- (NSImage *)minimumValueImage {
+	return self.sliderCell.minimumValueImage;
 }
 
-- (NSImage *)barFillBeforeKnobImage {
-    return ((LADSliderCell *) self.cell).barFillBeforeKnobImage;
+- (void)setMaximumValueImage:(NSImage *)maximumValueImage {
+	self.sliderCell.maximumValueImage = maximumValueImage;
 }
 
-- (void)setBarFillBeforeKnobImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barFillBeforeKnobImage = image;
-}
-
-- (NSImage *)barLeftAgeImage {
-    return ((LADSliderCell *) self.cell).barLeftAgeImage;
-}
-
-- (void)setBarLeftAgeImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barLeftAgeImage = image;
-}
-
-- (NSImage *)barRightAgeImage {
-    return ((LADSliderCell *) self.cell).barRightAgeImage;
-}
-
-- (void)setBarRightAgeImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barRightAgeImage = image;
+- (NSImage *)maximumValueImage {
+	return self.sliderCell.maximumValueImage;
 }
 
 @end

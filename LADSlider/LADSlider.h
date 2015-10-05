@@ -23,19 +23,7 @@
     If the one of the followings arguments is nil
     the method will return nil
  */
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
-        barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge;
-
-/*
-    Return LADSlider with custom knob and bar
-        isProgressType == YES
-    If the one of the followings arguments is nil
-    the method will return nil
- */
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
- barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
-        barLeftAgeImage:(NSImage *)barLeftAge barRightAgeImage:(NSImage *)barRightAge;
-
+- (id)initWithKnobImage:(NSImage *)knob minimumValueImage:(NSImage *)minImage maximumValueImage:(NSImage *)maxImage;
 
 /*
     LADSliderCell properties
@@ -43,19 +31,8 @@
     LADSliderCell.h
  */
 
-- (NSImage *)knobImage;
-- (void)setKnobImage:(NSImage *)image;
-
-- (NSImage *)barFillImage;
-- (void)setBarFillImage:(NSImage *)image;
-
-- (NSImage *)barFillBeforeKnobImage;
-- (void)setBarFillBeforeKnobImage:(NSImage *)image;
-
-- (NSImage *)barLeftAgeImage;
-- (void)setBarLeftAgeImage:(NSImage *)image;
-
-- (NSImage *)barRightAgeImage;
-- (void)setBarRightAgeImage:(NSImage *)image;
+@property (nonatomic) NSImage *knobImage;
+@property (nonatomic) NSImage *minimumValueImage;
+@property (nonatomic) NSImage *maximumValueImage;
 
 @end

@@ -25,10 +25,8 @@
 
 - (void)initITunesLikeSlider {
     _iTunesLikeSlider.knobImage = [NSImage imageNamed:@"itunes_knob.png"];
-    _iTunesLikeSlider.barFillImage = [NSImage imageNamed:@"itunes_barFill.png"];
-    _iTunesLikeSlider.barFillBeforeKnobImage = [NSImage imageNamed:@"itunes_barFillBeforeknob.png"];
-    _iTunesLikeSlider.barLeftAgeImage = [NSImage imageNamed:@"itunes_barLeftAge.png"];
-    _iTunesLikeSlider.barRightAgeImage = [NSImage imageNamed:@"itunes_barRightAge.png"];
+    _iTunesLikeSlider.minimumValueImage = [NSImage imageNamed:@"itunes_barLeftAge.png"];
+    _iTunesLikeSlider.maximumValueImage = [NSImage imageNamed:@"itunes_barRightAge.png"];
 }
 
 
