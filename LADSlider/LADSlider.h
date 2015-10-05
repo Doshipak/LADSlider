@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+IB_DESIGNABLE
 @interface LADSlider : NSSlider
 
 /*
@@ -31,8 +32,8 @@
     LADSliderCell.h
  */
 
-@property (nonatomic) NSImage *knobImage;
-@property (nonatomic) NSImage *minimumValueImage;
-@property (nonatomic) NSImage *maximumValueImage;
+@property (nonatomic) IBInspectable NSImage *knobImage;
+@property (nonatomic) IBInspectable NSImage *minimumValueImage;
+@property (nonatomic) IBInspectable NSImage *maximumValueImage;
 
 @end
