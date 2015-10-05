@@ -33,10 +33,6 @@
 		77BE07D417FEF381002748D9 /* LADAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LADAppDelegate.h; sourceTree = "<group>"; };
 		77BE07D517FEF381002748D9 /* LADAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LADAppDelegate.m; sourceTree = "<group>"; };
 		77BE07D817FEF382002748D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		77BE07E717FEF382002748D9 /* LADSliderExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LADSliderExampleTests-Info.plist"; sourceTree = "<group>"; };
-		77BE07E917FEF382002748D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		77BE07EB17FEF382002748D9 /* LADSliderExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LADSliderExampleTests.h; sourceTree = "<group>"; };
-		77BE07EC17FEF382002748D9 /* LADSliderExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LADSliderExampleTests.m; sourceTree = "<group>"; };
 		77BE07F617FEF3CD002748D9 /* LADSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LADSlider.h; path = ../LADSlider/LADSlider.h; sourceTree = "<group>"; };
 		77BE07F717FEF3CD002748D9 /* LADSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LADSlider.m; path = ../LADSlider/LADSlider.m; sourceTree = "<group>"; };
 		77BE07F917FEF3EA002748D9 /* LADSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LADSliderCell.h; path = ../LADSlider/LADSliderCell.h; sourceTree = "<group>"; };
@@ -60,7 +56,6 @@
 			children = (
 				77BE07C117FEF381002748D9 /* Frameworks */,
 				77BE07C817FEF381002748D9 /* LADSliderExample */,
-				77BE07E517FEF382002748D9 /* LADSliderExampleTests */,
 				77BE07C017FEF381002748D9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,25 +108,6 @@
 				77BE07CE17FEF381002748D9 /* main.m */,
 				77BE07D017FEF381002748D9 /* LADSliderExample-Prefix.pch */,
 				77BE07D117FEF381002748D9 /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		77BE07E517FEF382002748D9 /* LADSliderExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				77BE07EB17FEF382002748D9 /* LADSliderExampleTests.h */,
-				77BE07EC17FEF382002748D9 /* LADSliderExampleTests.m */,
-				77BE07E617FEF382002748D9 /* Supporting Files */,
-			);
-			path = LADSliderExampleTests;
-			sourceTree = "<group>";
-		};
-		77BE07E617FEF382002748D9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				77BE07E717FEF382002748D9 /* LADSliderExampleTests-Info.plist */,
-				77BE07E817FEF382002748D9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -247,14 +223,6 @@
 				77BE07D817FEF382002748D9 /* en */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		77BE07E817FEF382002748D9 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				77BE07E917FEF382002748D9 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

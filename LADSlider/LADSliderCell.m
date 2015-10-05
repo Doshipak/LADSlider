@@ -33,7 +33,7 @@
 }
 
 - (id)initWithKnobImage:(NSImage *)knob minimumValueImage:(NSImage *)minImage maximumValueImage:(NSImage *)maxImage {
-    if (!knob && !minImage && !maxImage ) {
+    if (!knob || !minImage || !maxImage ) {
         return nil;
     }
 
