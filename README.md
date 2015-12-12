@@ -20,7 +20,7 @@ but if you don't LADSlider will do it for you.
 
 - If you prefer code, you can set the images for your slider like this:
 ```objc
-	slider.knobImage = [NSImage imageNamed:@"knob"];
+slider.knobImage = [NSImage imageNamed:@"knob"];
 ```
 You may set only knob image if you want.
 ```objc
@@ -28,7 +28,10 @@ slider.minimumValueImage = [NSImage imageNamed:@"leftEdge"];
 slider.maximumValueImage = [NSImage imageNamed:@"rightEdge"];
 ```
 If you want to create a progress slider, e.g. like iTunes volume slider you need to set this image too:
-	slider.barFillBeforeKnobImage = [NSImage imageNamed:@"barFillBeforeKnob.png"];
+
+```objc
+slider.barFillBeforeKnobImage = [NSImage imageNamed:@"barFillBeforeKnob.png"];
+```
 
 ### From code
 - You just need to create LADSlider with one of the init methods:

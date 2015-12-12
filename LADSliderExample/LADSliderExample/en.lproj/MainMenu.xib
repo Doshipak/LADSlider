@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -658,7 +657,6 @@
                 <subviews>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="544" customClass="LADSlider">
                         <rect key="frame" x="18" y="48" width="493" height="20"/>
-                        <animations/>
                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="545" customClass="LADSliderCell"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="knobImage" value="knob"/>
@@ -666,13 +664,25 @@
                             <userDefinedRuntimeAttribute type="image" keyPath="maximumValueImage" value="maximumValueImage"/>
                         </userDefinedRuntimeAttributes>
                     </slider>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qLr-eh-mhc" customClass="LADSlider">
+                        <rect key="frame" x="18" y="18" width="493" height="20"/>
+                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="HAb-VS-Yq2" customClass="LADSliderCell"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="knobImage" value="knob"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="minimumValueImage" value="thinMinValue"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="maximumValueImage" value="thinMaxValue"/>
+                        </userDefinedRuntimeAttributes>
+                    </slider>
                 </subviews>
                 <constraints>
                     <constraint firstItem="544" firstAttribute="centerY" secondItem="372" secondAttribute="centerY" id="546"/>
                     <constraint firstItem="544" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="20" symbolic="YES" id="549"/>
                     <constraint firstAttribute="trailing" secondItem="544" secondAttribute="trailing" constant="20" symbolic="YES" id="554"/>
+                    <constraint firstAttribute="trailing" secondItem="qLr-eh-mhc" secondAttribute="trailing" constant="20" id="RL3-9k-TCs"/>
+                    <constraint firstItem="qLr-eh-mhc" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="20" id="XX2-Tg-32o"/>
+                    <constraint firstItem="qLr-eh-mhc" firstAttribute="top" secondItem="544" secondAttribute="bottom" constant="14" id="eQn-6T-V1U"/>
+                    <constraint firstAttribute="bottom" secondItem="qLr-eh-mhc" secondAttribute="bottom" constant="20" id="qSd-Tz-uva"/>
                 </constraints>
-                <animations/>
             </view>
             <point key="canvasLocation" x="409.5" y="366"/>
         </window>
@@ -685,7 +695,9 @@
     </objects>
     <resources>
         <image name="knob" width="19" height="19"/>
-        <image name="maximumValueImage" width="11" height="19"/>
-        <image name="minimumValueImage" width="11" height="19"/>
+        <image name="maximumValueImage" width="11" height="15"/>
+        <image name="minimumValueImage" width="11" height="15"/>
+        <image name="thinMaxValue" width="9" height="9"/>
+        <image name="thinMinValue" width="9" height="9"/>
     </resources>
 </document>

@@ -72,6 +72,10 @@
 }
 
 - (void)setMinimumValueImage:(NSImage *)minimumValueImage {
+    CGFloat leftInset = minimumValueImage.size.width-1;
+	if (NSEdgeInsetsEqual(minimumValueImage.capInsets, NSEdgeInsetsZero)) {
+		minimumValueImage.capInsets = NSEdgeInsetsMake(0, leftInset, 0, 0);
+	}
 	self.sliderCell.minimumValueImage = minimumValueImage;
 }
 
@@ -80,6 +84,10 @@
 }
 
 - (void)setMaximumValueImage:(NSImage *)maximumValueImage {
+    CGFloat rightInset = maximumValueImage.size.width-1;
+	if (NSEdgeInsetsEqual(maximumValueImage.capInsets, NSEdgeInsetsZero)) {
+		maximumValueImage.capInsets = NSEdgeInsetsMake(0, 0, 0, rightInset);
+	}
 	self.sliderCell.maximumValueImage = maximumValueImage;
 }
 

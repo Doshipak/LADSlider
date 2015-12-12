@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "LeftBar.png",
+      "filename" : "LeftBarThin.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "LeftBar@2x.png",
+      "filename" : "LeftBarThin@2x.png",
       "scale" : "2x"
     },
     {

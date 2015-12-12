@@ -1,35 +1,13 @@
 {
   "images" : [
     {
-      "resizing" : {
-        "mode" : "3-part-horizontal",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1
-        },
-        "cap-insets" : {
-          "right" : 10,
-          "left" : 0
-        }
-      },
       "idiom" : "universal",
-      "filename" : "edgeRight.png",
+      "filename" : "RightBar.png",
       "scale" : "1x"
     },
     {
-      "resizing" : {
-        "mode" : "3-part-horizontal",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1
-        },
-        "cap-insets" : {
-          "right" : 21,
-          "left" : 0
-        }
-      },
       "idiom" : "universal",
-      "filename" : "edgeRight@2x.png",
+      "filename" : "RightBar@2x.png",
       "scale" : "2x"
     },
     {

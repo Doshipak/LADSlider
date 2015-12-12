@@ -61,6 +61,7 @@
     [self.controlView lockFocus];
 	[_knobImage drawInRect:_currentKnobRect];
     [self.controlView unlockFocus];
+	NSLog(@"%@", NSStringFromRect(self.controlView.frame));
 }
 
 - (void)drawBarInside:(NSRect)cellFrame flipped:(BOOL)flipped {
@@ -75,7 +76,10 @@
     NSRect beforeKnobRect = [self createBeforeKnobRect];
     NSRect afterKnobRect = [self createAfterKnobRect];
 
+	NSLog(@"CELL FRAME: %@", NSStringFromRect(cellFrame));
 	[self.controlView lockFocus];
+	NSEdgeInsets i = _maximumValueImage.capInsets;
+	NSLog(@"%lf, %lf, %lf, %lf", i.top, i.left, i.bottom, i.right);
 	[_minimumValueImage drawInRect:beforeKnobRect];
 	[_maximumValueImage drawInRect:afterKnobRect];
 	[self.controlView unlockFocus];
@@ -86,7 +90,7 @@
 
     beforeKnobRect.size.width = _currentKnobRect.origin.x + _knobImage.size.width / 2;
     beforeKnobRect.size.height = _minimumValueImage.size.height;
-	beforeKnobRect.origin.y = _currentKnobRect.origin.y;
+	beforeKnobRect.origin.y = _barRect.origin.y + _barRect.size.height / 2.0 - _minimumValueImage.size.height / 2.0 - 1;
 
     return beforeKnobRect;
 }
@@ -97,6 +101,7 @@
     afterKnobRect.origin.x += _knobImage.size.width / 2;
     afterKnobRect.size.width = _barRect.size.width - afterKnobRect.origin.x;
     afterKnobRect.size.height = _maximumValueImage.size.height;
+	afterKnobRect.origin.y = _barRect.origin.y + _barRect.size.height / 2.0 - _maximumValueImage.size.height / 2.0 - 1;
 
     return afterKnobRect;
 }
