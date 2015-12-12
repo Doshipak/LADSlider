@@ -61,7 +61,6 @@
     [self.controlView lockFocus];
 	[_knobImage drawInRect:_currentKnobRect];
     [self.controlView unlockFocus];
-	NSLog(@"%@", NSStringFromRect(self.controlView.frame));
 }
 
 - (void)drawBarInside:(NSRect)cellFrame flipped:(BOOL)flipped {
@@ -76,10 +75,7 @@
     NSRect beforeKnobRect = [self createBeforeKnobRect];
     NSRect afterKnobRect = [self createAfterKnobRect];
 
-	NSLog(@"CELL FRAME: %@", NSStringFromRect(cellFrame));
 	[self.controlView lockFocus];
-	NSEdgeInsets i = _maximumValueImage.capInsets;
-	NSLog(@"%lf, %lf, %lf, %lf", i.top, i.left, i.bottom, i.right);
 	[_minimumValueImage drawInRect:beforeKnobRect];
 	[_maximumValueImage drawInRect:afterKnobRect];
 	[self.controlView unlockFocus];

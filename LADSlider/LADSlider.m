@@ -21,9 +21,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
-    if( ![self.cell isKindOfClass:[LADSliderCell class]] ) {
-        //Set our LADSlider.cell to LADSliderCell
+    
+    if(![self.cell isKindOfClass:[LADSliderCell class]]) {
         LADSliderCell *cell = [[LADSliderCell alloc] init];
         [self setCell:cell];
     }
@@ -31,11 +30,8 @@
 
 - (id)initWithKnobImage:(NSImage *)knob {
     self = [super init];
-
-    if( self ) {
+    if (self) {
         [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob]];
-
-//      If the cell is nil we return nil
         return nil == self.cell ? nil : self;
     }
 
@@ -54,11 +50,6 @@
     return self;
 }
 
-/*
-    Also need to throw on some
-    LADSliderCell setters and getters
-*/
-
 - (LADSliderCell *)sliderCell {
 	return self.cell;
 }
@@ -72,8 +63,8 @@
 }
 
 - (void)setMinimumValueImage:(NSImage *)minimumValueImage {
-    CGFloat leftInset = minimumValueImage.size.width-1;
-	if (NSEdgeInsetsEqual(minimumValueImage.capInsets, NSEdgeInsetsZero)) {
+    if (NSEdgeInsetsEqual(minimumValueImage.capInsets, NSEdgeInsetsZero)) {
+        CGFloat leftInset = minimumValueImage.size.width-1;
 		minimumValueImage.capInsets = NSEdgeInsetsMake(0, leftInset, 0, 0);
 	}
 	self.sliderCell.minimumValueImage = minimumValueImage;
@@ -84,8 +75,8 @@
 }
 
 - (void)setMaximumValueImage:(NSImage *)maximumValueImage {
-    CGFloat rightInset = maximumValueImage.size.width-1;
-	if (NSEdgeInsetsEqual(maximumValueImage.capInsets, NSEdgeInsetsZero)) {
+    if (NSEdgeInsetsEqual(maximumValueImage.capInsets, NSEdgeInsetsZero)) {
+        CGFloat rightInset = maximumValueImage.size.width-1;
 		maximumValueImage.capInsets = NSEdgeInsetsMake(0, 0, 0, rightInset);
 	}
 	self.sliderCell.maximumValueImage = maximumValueImage;
