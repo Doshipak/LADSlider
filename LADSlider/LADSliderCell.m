@@ -11,8 +11,6 @@
 @interface LADSliderCell () {
     NSRect _currentKnobRect;
     NSRect _barRect;
-
-    BOOL _flipped;
 }
 
 @end
@@ -20,28 +18,22 @@
 @implementation LADSliderCell
 
 - (id)initWithKnobImage:(NSImage *)knob {
-    if (!knob) {
-        return nil;
-    }
-
     self = [self init];
     if (self) {
         _knobImage = knob;
+        return !knob ? nil : self;
     }
 
     return self;
 }
 
 - (id)initWithKnobImage:(NSImage *)knob minimumValueImage:(NSImage *)minImage maximumValueImage:(NSImage *)maxImage {
-    if (!knob || !minImage || !maxImage ) {
-        return nil;
-    }
-
     self = [self init];
     if (self) {
         _knobImage = knob;
         _minimumValueImage = minImage;
 		_maximumValueImage = maxImage;
+        return (!knob || !minImage || !maxImage) ? nil : self;
     }
 
     return self;
@@ -65,7 +57,6 @@
 
 - (void)drawBarInside:(NSRect)cellFrame flipped:(BOOL)flipped {
 	_barRect = cellFrame;
-	_flipped = flipped;
 	
     if (!_knobImage || !_minimumValueImage || !_maximumValueImage) {
         [super drawBarInside:cellFrame flipped:flipped];

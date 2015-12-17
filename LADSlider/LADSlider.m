@@ -10,8 +10,6 @@
 #import "LADSliderCell.h"
 
 @implementation LADSlider
-
-
 //  We need to override it to prevent drawing bugs
 //  Follow this link to know more about it:
 //  http://stackoverflow.com/questions/3985816/custom-nsslidercell
@@ -23,16 +21,15 @@
     [super awakeFromNib];
     
     if(![self.cell isKindOfClass:[LADSliderCell class]]) {
-        LADSliderCell *cell = [[LADSliderCell alloc] init];
-        [self setCell:cell];
+        self.cell = [[LADSliderCell alloc] init];
     }
 }
 
 - (id)initWithKnobImage:(NSImage *)knob {
     self = [super init];
     if (self) {
-        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob]];
-        return nil == self.cell ? nil : self;
+        self.cell = [[LADSliderCell alloc] initWithKnobImage:knob];
+        return !self.cell ? nil : self;
     }
 
     return self;
@@ -40,10 +37,8 @@
 
 - (id)initWithKnobImage:(NSImage *)knob minimumValueImage:(NSImage *)minImage maximumValueImage:(NSImage *)maxImage {
     self = [super init];
-
     if (self) {
-        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob minimumValueImage:minImage maximumValueImage:maxImage]];
-
+        self.cell = [[LADSliderCell alloc] initWithKnobImage:knob minimumValueImage:minImage maximumValueImage:maxImage];
         return !self.cell ? nil : self;
     }
 
