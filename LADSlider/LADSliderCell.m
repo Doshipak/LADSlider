@@ -39,6 +39,12 @@
     return self;
 }
 
+- (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView {
+    BOOL val = [super startTrackingAt:startPoint inView:controlView];
+    [self drawInteriorWithFrame:controlView.bounds inView:controlView];
+    return val;
+}
+
 - (void)drawKnob:(NSRect)knobRect {
     if (!_knobImage) {
         [super drawKnob:knobRect];
