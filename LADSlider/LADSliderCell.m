@@ -8,10 +8,9 @@
 
 #import "LADSliderCell.h"
 
-@interface LADSliderCell () {
-    NSRect _currentKnobRect;
-    NSRect _barRect;
-}
+@interface LADSliderCell ()
+
+@property (nonatomic) NSRect currentKnobRect;
 
 @end
 
@@ -31,8 +30,8 @@
     self = [self init];
     if (self) {
         _knobImage = knob;
-        _minimumValueImage = minImage;
-		_maximumValueImage = maxImage;
+        self.minimumValueImage = minImage;
+        self.maximumValueImage = maxImage;
         return (!knob || !minImage || !maxImage) ? nil : self;
     }
 
@@ -50,11 +49,10 @@
         [super drawKnob:knobRect];
         return;
     }
-
-	_currentKnobRect = (NSRect){
-		.origin = knobRect.origin,
-		.size = _knobImage.size
-	};
+    
+    CGFloat dx = (knobRect.size.width - _knobImage.size.width) / 2.0;
+    CGFloat dy = (knobRect.size.height - _knobImage.size.height) / 2.0;
+    _currentKnobRect = CGRectInset(knobRect, dx, dy);
 	
     [self.controlView lockFocus];
 	[_knobImage drawInRect:_currentKnobRect];
@@ -62,40 +60,50 @@
 }
 
 - (void)drawBarInside:(NSRect)cellFrame flipped:(BOOL)flipped {
-	_barRect = cellFrame;
-	
     if (!_knobImage || !_minimumValueImage || !_maximumValueImage) {
         [super drawBarInside:cellFrame flipped:flipped];
         return;
     }
-
-    NSRect beforeKnobRect = [self createBeforeKnobRect];
-    NSRect afterKnobRect = [self createAfterKnobRect];
-
+    
 	[self.controlView lockFocus];
-	[_minimumValueImage drawInRect:beforeKnobRect];
-	[_maximumValueImage drawInRect:afterKnobRect];
+	[_minimumValueImage drawInRect:[self beforeKnobRect:cellFrame]];
+	[_maximumValueImage drawInRect:[self afterKnobRect:cellFrame]];
 	[self.controlView unlockFocus];
 }
 
-- (NSRect)createBeforeKnobRect {
-    NSRect beforeKnobRect = _barRect;
+- (NSRect)beforeKnobRect:(NSRect)barRect {
+    NSRect beforeKnobRect = barRect;
+    NSSize minValueImageSize = _minimumValueImage.size;
 
-    beforeKnobRect.size.width = _currentKnobRect.origin.x + _knobImage.size.width / 2;
-    beforeKnobRect.size.height = _minimumValueImage.size.height;
-	beforeKnobRect.origin.y = _barRect.origin.y + _barRect.size.height / 2.0 - _minimumValueImage.size.height / 2.0 - 1;
-
+    if (self.vertical) {
+        beforeKnobRect.origin.x = CGRectGetMidX(barRect) - minValueImageSize.width / 2.0;
+        beforeKnobRect.size.width = minValueImageSize.width;
+        beforeKnobRect.size.height = CGRectGetMidY(_currentKnobRect) - barRect.origin.y;
+    } else {
+        beforeKnobRect.origin.y = CGRectGetMidY(barRect) - minValueImageSize.height / 2.0;
+        beforeKnobRect.size.width = CGRectGetMidX(_currentKnobRect) - barRect.origin.x;
+        beforeKnobRect.size.height = minValueImageSize.height;
+    }
+    
     return beforeKnobRect;
 }
 
-- (NSRect)createAfterKnobRect {
-    NSRect afterKnobRect = _currentKnobRect;
-
-    afterKnobRect.origin.x += _knobImage.size.width / 2;
-    afterKnobRect.size.width = _barRect.size.width - afterKnobRect.origin.x;
-    afterKnobRect.size.height = _maximumValueImage.size.height;
-	afterKnobRect.origin.y = _barRect.origin.y + _barRect.size.height / 2.0 - _maximumValueImage.size.height / 2.0 - 1;
-
+- (NSRect)afterKnobRect:(NSRect)barRect {
+    NSRect afterKnobRect = barRect;
+    NSSize maxValueImageSize = _maximumValueImage.size;
+    
+    if (self.vertical) {
+        afterKnobRect.origin.x += (barRect.size.width - maxValueImageSize.width) / 2.0;
+        afterKnobRect.origin.y = CGRectGetMidY(_currentKnobRect);
+        afterKnobRect.size.width = maxValueImageSize.width;
+        afterKnobRect.size.height -= CGRectGetMidY(_currentKnobRect);;
+    } else {
+        afterKnobRect.origin.x = CGRectGetMidX(_currentKnobRect);
+        afterKnobRect.origin.y += (barRect.size.height - maxValueImageSize.height) / 2.0;
+        afterKnobRect.size.width -= CGRectGetMidX(_currentKnobRect);
+        afterKnobRect.size.height = maxValueImageSize.height;
+    }
+        
     return afterKnobRect;
 }
 

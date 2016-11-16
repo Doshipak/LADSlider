@@ -17,9 +17,9 @@
     NSSmallControlSize:     15x15
     NSMiniControlSize:
 */
-@property (strong, nonatomic) NSImage *knobImage;
-@property (strong, nonatomic) NSImage *minimumValueImage;
-@property (strong, nonatomic) NSImage *maximumValueImage;
+@property (nonatomic) NSImage *knobImage;
+@property (nonatomic) NSImage *minimumValueImage;
+@property (nonatomic) NSImage *maximumValueImage;
 
 
 /*
