@@ -54,9 +54,7 @@
     CGFloat dy = (knobRect.size.height - _knobImage.size.height) / 2.0;
     _currentKnobRect = CGRectInset(knobRect, dx, dy);
 	
-    [self.controlView lockFocus];
 	[_knobImage drawInRect:_currentKnobRect];
-    [self.controlView unlockFocus];
 }
 
 - (void)drawBarInside:(NSRect)cellFrame flipped:(BOOL)flipped {
@@ -65,10 +63,8 @@
         return;
     }
     
-	[self.controlView lockFocus];
 	[_minimumValueImage drawInRect:[self beforeKnobRect:cellFrame]];
 	[_maximumValueImage drawInRect:[self afterKnobRect:cellFrame]];
-	[self.controlView unlockFocus];
 }
 
 - (NSRect)beforeKnobRect:(NSRect)barRect {
