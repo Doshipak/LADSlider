@@ -9,9 +9,12 @@
 #import "LADSlider.h"
 #import "LADSliderCell.h"
 
+@interface NSImage (Rotated)
+- (NSImage *)imageRotated:(CGFloat)degrees;
+@end
+
+
 @implementation LADSlider
-
-
 //  We need to override it to prevent drawing bugs
 //  Follow this link to know more about it:
 //  http://stackoverflow.com/questions/3985816/custom-nsslidercell
@@ -21,101 +24,109 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
-    if( ![self.cell isKindOfClass:[LADSliderCell class]] ) {
-        //Set our LADSlider.cell to LADSliderCell
-        LADSliderCell *cell = [[LADSliderCell alloc] init];
-        [self setCell:cell];
+    
+    if(![self.cell isKindOfClass:[LADSliderCell class]]) {
+        self.cell = [[LADSliderCell alloc] init];
     }
 }
 
 - (id)initWithKnobImage:(NSImage *)knob {
     self = [super init];
-
-    if( self ) {
-        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob]];
-
-//      If the cell is nil we return nil
-        return nil == self.cell ? nil : self;
+    if (self) {
+        self.cell = [[LADSliderCell alloc] initWithKnobImage:knob];
+        return !self.cell ? nil : self;
     }
 
     return self;
 }
 
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
-        barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge {
+- (id)initWithKnobImage:(NSImage *)knob minimumValueImage:(NSImage *)minImage maximumValueImage:(NSImage *)maxImage {
     self = [super init];
-
-    if( self ) {
-        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob barFillImage:barFill
-                                               barLeftAgeImage:barLeftAge andbarRightAgeImage:barRightAge]];
-
-//      If the cell is nil we return nil
-        return nil == self.cell ? nil : self;
+    if (self) {
+        self.cell = [[LADSliderCell alloc] initWithKnobImage:knob minimumValueImage:minImage maximumValueImage:maxImage];
+        return !self.cell ? nil : self;
     }
 
     return self;
 }
 
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
- barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
-        barLeftAgeImage:(NSImage *)barLeftAge barRightAgeImage:(NSImage *)barRightAge {
-    self = [super init];
-
-    if( self ) {
-        [self setCell:[[LADSliderCell alloc] initWithKnobImage:knob barFillImage:barFill
-                                        barFillBeforeKnobImage:barFillBeforeKnob
-                                               barLeftAgeImage:barLeftAge barRightAgeImage:barRightAge]];
-
-//      If the cell is nil we return nil
-        return nil == self.cell ? nil : self;
-    }
-
-    return self;
+- (LADSliderCell *)sliderCell {
+	return self.cell;
 }
 
-/*
-    Also need to throw on some
-    LADSliderCell setters and getters
-*/
 - (NSImage *)knobImage {
-    return ((LADSliderCell *) self.cell).knobImage;
+    return self.sliderCell.knobImage;
 }
 
 - (void)setKnobImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).knobImage = image;
+    self.sliderCell.knobImage = image;
 }
 
-- (NSImage *)barFillImage {
-    return ((LADSliderCell *) self.cell).barFillImage;
+- (NSImage *)minimumValueImage {
+    return self.sliderCell.minimumValueImage;
 }
 
-- (void)setBarFillImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barFillImage = image;
+- (void)setMinimumValueImage:(NSImage *)minimumValueImage {
+    if (NSEdgeInsetsEqual(minimumValueImage.capInsets, NSEdgeInsetsZero)) {
+        CGFloat inset = minimumValueImage.size.width-1;
+        if (self.sliderCell.vertical) {
+            minimumValueImage = [minimumValueImage imageRotated:90];
+            minimumValueImage.capInsets = NSEdgeInsetsMake(0, 0, inset, 0);
+        } else {
+            minimumValueImage.capInsets = NSEdgeInsetsMake(0, inset, 0, 0);
+        }
+	}
+	self.sliderCell.minimumValueImage = minimumValueImage;
 }
 
-- (NSImage *)barFillBeforeKnobImage {
-    return ((LADSliderCell *) self.cell).barFillBeforeKnobImage;
+- (NSImage *)maximumValueImage {
+    return self.sliderCell.maximumValueImage;
 }
 
-- (void)setBarFillBeforeKnobImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barFillBeforeKnobImage = image;
+- (void)setMaximumValueImage:(NSImage *)maximumValueImage {
+    if (NSEdgeInsetsEqual(maximumValueImage.capInsets, NSEdgeInsetsZero)) {
+        CGFloat inset = maximumValueImage.size.width-1;
+        if (self.sliderCell.vertical) {
+            maximumValueImage = [maximumValueImage imageRotated:90];
+            maximumValueImage.capInsets = NSEdgeInsetsMake(inset, 0, 0, 0);
+        } else {
+            maximumValueImage.capInsets = NSEdgeInsetsMake(0, 0, 0, inset);
+        }
+	}
+	self.sliderCell.maximumValueImage = maximumValueImage;
 }
 
-- (NSImage *)barLeftAgeImage {
-    return ((LADSliderCell *) self.cell).barLeftAgeImage;
-}
+@end
 
-- (void)setBarLeftAgeImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barLeftAgeImage = image;
-}
+@implementation NSImage (Rotated)
 
-- (NSImage *)barRightAgeImage {
-    return ((LADSliderCell *) self.cell).barRightAgeImage;
+// Source from https://gist.github.com/Rm1210/10621763
+- (NSImage *)imageRotated:(CGFloat)degrees {
+    degrees = fmod(degrees, 360.);
+    if (0 == degrees) {
+        return self;
+    }
+    NSSize size = [self size];
+    NSSize maxSize;
+    if (90. == degrees || 270. == degrees || -90. == degrees || -270. == degrees) {
+        maxSize = NSMakeSize(size.height, size.width);
+    } else if (180. == degrees || -180. == degrees) {
+        maxSize = size;
+    } else {
+        maxSize = NSMakeSize(20+MAX(size.width, size.height), 20+MAX(size.width, size.height));
+    }
+    NSAffineTransform *rot = [NSAffineTransform transform];
+    [rot rotateByDegrees:degrees];
+    NSAffineTransform *center = [NSAffineTransform transform];
+    [center translateXBy:maxSize.width / 2. yBy:maxSize.height / 2.];
+    [rot appendTransform:center];
+    NSImage *image = [[NSImage alloc] initWithSize:maxSize];
+    [image lockFocus];
+    [rot concat];
+    NSRect rect = NSMakeRect(0, 0, size.width, size.height);
+    NSPoint corner = NSMakePoint(-size.width / 2., -size.height / 2.);
+    [self drawAtPoint:corner fromRect:rect operation:NSCompositeCopy fraction:1.0];
+    [image unlockFocus];
+    return image;
 }
-
-- (void)setBarRightAgeImage:(NSImage *)image {
-    ((LADSliderCell *) self.cell).barRightAgeImage = image;
-}
-
 @end

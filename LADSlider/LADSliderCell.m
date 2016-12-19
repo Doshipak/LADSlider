@@ -8,190 +8,101 @@
 
 #import "LADSliderCell.h"
 
-@interface LADSliderCell () {
-    NSRect _currentKnobRect;
-    NSRect _barRect;
+@interface LADSliderCell ()
 
-    BOOL _flipped;
-}
+@property (nonatomic) NSRect currentKnobRect;
 
 @end
 
 @implementation LADSliderCell
 
-- (id)init {
-    self = [super init];
-
-    if( self ) {
-
-    }
-
-    return self;
-}
-
-
 - (id)initWithKnobImage:(NSImage *)knob {
-    if( nil == knob ) {
-        return nil;
-    }
-
     self = [self init];
-
-    if( self ) {
+    if (self) {
         _knobImage = knob;
+        return !knob ? nil : self;
     }
 
     return self;
 }
 
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
-        barLeftAgeImage:(NSImage *)barLeftAge andbarRightAgeImage:(NSImage *)barRightAge {
-    if( nil == knob && nil == barFill &&
-            nil == barLeftAge && nil == barRightAge ) {
-        return nil;
-    }
-
+- (id)initWithKnobImage:(NSImage *)knob minimumValueImage:(NSImage *)minImage maximumValueImage:(NSImage *)maxImage {
     self = [self init];
-
-    if( self ) {
+    if (self) {
         _knobImage = knob;
-        _barFillImage = barFill;
-        _barFillBeforeKnobImage = barFill;
-        _barLeftAgeImage = barLeftAge;
-        _barRightAgeImage = barRightAge;
+        self.minimumValueImage = minImage;
+        self.maximumValueImage = maxImage;
+        return (!knob || !minImage || !maxImage) ? nil : self;
     }
 
     return self;
 }
 
-- (id)initWithKnobImage:(NSImage *)knob barFillImage:(NSImage *)barFill
- barFillBeforeKnobImage:(NSImage *)barFillBeforeKnob
-        barLeftAgeImage:(NSImage *)barLeftAge barRightAgeImage:(NSImage *)barRightAge {
-    if( nil == knob && nil == barFill &&
-            nil == barFillBeforeKnob &&
-            nil == barLeftAge && nil == barRightAge ) {
-        return nil;
-    }
-
-    self = [self init];
-
-    if( self ) {
-        _knobImage = knob;
-        _barFillImage = barFill;
-        _barFillBeforeKnobImage = barFillBeforeKnob;
-        _barLeftAgeImage = barLeftAge;
-        _barRightAgeImage = barRightAge;
-    }
-
-    return self;
+- (BOOL)startTrackingAt:(NSPoint)startPoint inView:(NSView *)controlView {
+    BOOL val = [super startTrackingAt:startPoint inView:controlView];
+    [self drawInteriorWithFrame:controlView.bounds inView:controlView];
+    return val;
 }
 
 - (void)drawKnob:(NSRect)knobRect {
-//  If don't have the knobImage
-//  just call the super method
-    if( nil == _knobImage ) {
+    if (!_knobImage) {
         [super drawKnob:knobRect];
         return;
     }
-
-//  We need to save the knobRect to redraw the bar correctly
-    _currentKnobRect = knobRect;
-
-//---------------------Interesting-bug----------------------
-//  Sometimes slider may have some bugs when you
-//  just click on it and hold the mouse down.
-//  To prevent this I call this method once again
-//  right here.
-//  !!!- If you know other way how to prevent it
-//  please tell me about it -!!!
-    [self drawBarInside:_barRect flipped:_flipped];
-//---------------------Interesting-bug----------------------
-
-    [self.controlView lockFocus];
-
-//  We crete this to make a right proportion for the knob rect
-//  For example you knobImage width is longer then allowable
-//  this line will position you knob normally inside the slider
-    CGFloat newOriginX = knobRect.origin.x *
-            (_barRect.size.width - (_knobImage.size.width - knobRect.size.width)) / _barRect.size.width;
-
-    [_knobImage compositeToPoint:NSMakePoint(newOriginX, knobRect.origin.y + _knobImage.size.height)
-                       operation:NSCompositeSourceOver];
-
-    [self.controlView unlockFocus];
+    
+    CGFloat dx = (knobRect.size.width - _knobImage.size.width) / 2.0;
+    CGFloat dy = (knobRect.size.height - _knobImage.size.height) / 2.0;
+    _currentKnobRect = CGRectInset(knobRect, dx, dy);
+	
+	[_knobImage drawInRect:_currentKnobRect];
 }
 
 - (void)drawBarInside:(NSRect)cellFrame flipped:(BOOL)flipped {
-//  If don't have any of the bar images
-//  just call the super method
-    if( nil == _knobImage && nil == _barFillImage &&
-            nil == _barFillBeforeKnobImage &&
-            nil == _barLeftAgeImage && nil == _barRightAgeImage ) {
+    if (!_knobImage || !_minimumValueImage || !_maximumValueImage) {
         [super drawBarInside:cellFrame flipped:flipped];
         return;
     }
-
-//---------------------Interesting-bug----------------------
-//   Again we save this to prevent the same bug
-//   I've wrote inside the drawKnob: method
-    _barRect = cellFrame;
-    _flipped = flipped;
-//---------------------Interesting-bug----------------------
-
-    NSRect beforeKnobRect = [self createBeforeKnobRect];
-    NSRect afterKnobRect = [self createAfterKnobRect];
-
-//  Sometimes you can see the ages off you bar
-//  even if your knob is at the end or
-//  at the beginning of it. It's about one pixel
-//  but this help to hide that edges
-    if( self.minValue != self.doubleValue ) {
-        NSDrawThreePartImage(beforeKnobRect, _barLeftAgeImage, _barFillBeforeKnobImage, _barFillBeforeKnobImage,
-                NO, NSCompositeSourceOver, 1.0, flipped);
-    }
-
-    if( self.maxValue != self.doubleValue ) {
-        NSDrawThreePartImage(afterKnobRect, _barFillImage, _barFillImage, _barRightAgeImage,
-                NO, NSCompositeSourceOver, 1.0, flipped);
-    }
+    
+	[_minimumValueImage drawInRect:[self beforeKnobRect:cellFrame]];
+	[_maximumValueImage drawInRect:[self afterKnobRect:cellFrame]];
 }
 
-- (NSRect)createBeforeKnobRect {
-    NSRect beforeKnobRect = _barRect;
+- (NSRect)beforeKnobRect:(NSRect)barRect {
+    NSRect beforeKnobRect = barRect;
+    NSSize minValueImageSize = _minimumValueImage.size;
 
-    beforeKnobRect.size.width = _currentKnobRect.origin.x + _knobImage.size.width / 2;
-    beforeKnobRect.size.height = _barFillBeforeKnobImage.size.height;
-    beforeKnobRect.origin.y = beforeKnobRect.size.height / 2;
-
+    if (self.vertical) {
+        beforeKnobRect.origin.x = CGRectGetMidX(barRect) - minValueImageSize.width / 2.0;
+        beforeKnobRect.size.width = minValueImageSize.width;
+        beforeKnobRect.size.height = CGRectGetMidY(_currentKnobRect) - barRect.origin.y;
+    } else {
+        beforeKnobRect.origin.y = CGRectGetMidY(barRect) - minValueImageSize.height / 2.0;
+        beforeKnobRect.size.width = CGRectGetMidX(_currentKnobRect) - barRect.origin.x;
+        beforeKnobRect.size.height = minValueImageSize.height;
+    }
+    
     return beforeKnobRect;
 }
 
-- (NSRect)createAfterKnobRect {
-    NSRect afterKnobRect = _currentKnobRect;
-
-    afterKnobRect.origin.x += _knobImage.size.width / 2;
-    afterKnobRect.size.width = _barRect.size.width - afterKnobRect.origin.x;
-    afterKnobRect.size.height = _barFillImage.size.height;
-    afterKnobRect.origin.y = afterKnobRect.size.height / 2;
-
+- (NSRect)afterKnobRect:(NSRect)barRect {
+    NSRect afterKnobRect = barRect;
+    NSSize maxValueImageSize = _maximumValueImage.size;
+    
+    if (self.vertical) {
+        afterKnobRect.origin.x += (barRect.size.width - maxValueImageSize.width) / 2.0;
+        afterKnobRect.origin.y = CGRectGetMidY(_currentKnobRect);
+        afterKnobRect.size.width = maxValueImageSize.width;
+        afterKnobRect.size.height -= CGRectGetMidY(_currentKnobRect);;
+    } else {
+        afterKnobRect.origin.x = CGRectGetMidX(_currentKnobRect);
+        afterKnobRect.origin.y += (barRect.size.height - maxValueImageSize.height) / 2.0;
+        afterKnobRect.size.width -= CGRectGetMidX(_currentKnobRect);
+        afterKnobRect.size.height = maxValueImageSize.height;
+    }
+        
     return afterKnobRect;
 }
 
-- (void)setBarFillImage:(NSImage *)barFillImage {
-    _barFillImage = barFillImage;
-
-    if( nil == _barFillBeforeKnobImage ) {
-        _barFillBeforeKnobImage = barFillImage;
-    }
-}
-
-- (void)setBarFillBeforeKnobImage:(NSImage *)barFillBeforeKnobImage {
-    _barFillBeforeKnobImage = barFillBeforeKnobImage;
-
-    if( nil == _barFillImage ) {
-        _barFillImage = barFillBeforeKnobImage;
-    }
-}
-
-
 @end
+
+
